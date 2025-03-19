@@ -1,7 +1,3 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
-import CategoriesScreen from "./screens/Categories";
-import * as SplashScreen from "expo-splash-screen";
 import {
   Lato_400Regular,
   Lato_300Light,
@@ -10,10 +6,14 @@ import {
   Lato_900Black,
   useFonts,
 } from "@expo-google-fonts/lato";
-import { useEffect } from "react";
-
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import * as SplashScreen from "expo-splash-screen";
+import { StatusBar } from "expo-status-bar";
+import { useEffect } from "react";
+import { StyleSheet, Text, View } from "react-native";
+
+import CategoriesScreen from "./screens/Categories";
 import MealsOverviewScreen from "./screens/MealsOverview";
 
 const Stack = createNativeStackNavigator();
@@ -46,6 +46,4 @@ export default function App() {
   );
 }
 
-const styles = StyleSheet.create({
-
-});
+const styles = StyleSheet.create({});
