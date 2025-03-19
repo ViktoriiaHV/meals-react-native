@@ -10,13 +10,14 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 import { StyleSheet } from "react-native";
 
 import CategoriesScreen from "./screens/Categories";
 import MealsOverviewScreen from "./screens/MealsOverview";
+import { RootStackParamList } from "./types/navigation.types";
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function App() {
   const [fontsLoaded, fontsError] = useFonts({
@@ -27,7 +28,7 @@ export default function App() {
     Lato_900Black,
   });
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (fontsLoaded || fontsError) {
       SplashScreen.hideAsync();
     }
@@ -37,9 +38,31 @@ export default function App() {
     <>
       <StatusBar style="auto" />
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Categories">
-          <Stack.Screen name="Categories" component={CategoriesScreen} />
-          <Stack.Screen name="MealsOverview" component={MealsOverviewScreen} />
+        <Stack.Navigator
+          initialRouteName="Categories"
+          screenOptions={{
+            headerStyle: { backgroundColor: "#ecc8e1" },
+            headerTintColor: "#88005f",
+            contentStyle: {
+              backgroundColor: "#f2dbee",
+            },
+          }}
+        >
+          <Stack.Screen
+            name="Categories"
+            component={CategoriesScreen}
+            options={{
+              title: "Categories",
+            }}
+          />
+          <Stack.Screen
+            name="MealsOverview"
+            component={MealsOverviewScreen}
+            // @INFO used alternative way inside the component itself
+            // options={({ route }) => ({
+            //   title: route.params.title,
+            // })}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </>

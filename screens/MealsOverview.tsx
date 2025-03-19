@@ -1,16 +1,27 @@
-import { RouteProp, useRoute } from "@react-navigation/native";
+import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
+import { useEffect } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 
-import { MEALS } from "../data/dummy-data";
-import { RootStackParamList } from "../types/navigation.types";
 import MealItem from "../components/MealItem";
+import { MEALS } from "../data/dummy-data";
+import {
+  CategoriesScreenNavigationProp,
+  RootStackParamList,
+} from "../types/navigation.types";
 
 type MealsOverviewRouteProp = RouteProp<RootStackParamList, "MealsOverview">;
 
 function MealsOverviewScreen() {
   const route = useRoute<MealsOverviewRouteProp>();
+  const navigation = useNavigation<CategoriesScreenNavigationProp>();
 
   const { title, id } = route.params;
+
+  useEffect(() => {
+    navigation.setOptions({
+      title,
+    });
+  }, [navigation, title]);
 
   const filteredMeals = MEALS.filter((meal) => meal.categoryIds.includes(id));
 
@@ -33,10 +44,10 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   heading: {
-    fontFamily: 'Lato_300Light_Italic',
-    fontWeight: '700',
+    fontFamily: "Lato_300Light_Italic",
+    fontWeight: "700",
     fontSize: 32,
-    textAlign: 'center',
-    paddingBottom: 16
+    textAlign: "center",
+    paddingBottom: 16,
   },
 });
