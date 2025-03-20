@@ -5,14 +5,19 @@ import Category from "../models/category";
 import Meal from "../models/meal";
 
 export type RootStackParamList = {
-  Categories: undefined;
+  Homepage: undefined;
   MealsOverview: Partial<Category>;
   MealDetails: Partial<Meal>;
 };
 
-export type CategoriesScreenNavigationProp = NativeStackNavigationProp<
+export type DrawerParamList = {
+  Categories: undefined;
+  Favourites: undefined;
+};
+
+export type HomeScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
-  "MealsOverview"
+  "Homepage"
 >;
 
 export type MealsOverviewRouteProp = RouteProp<RootStackParamList, "MealsOverview">;

@@ -10,11 +10,11 @@ import {
 
 import MealItemDetails from "./MealItemDetails";
 import Meal from "../models/meal";
-import { CategoriesScreenNavigationProp } from "../types/navigation.types";
+import { HomeScreenNavigationProp } from "../types/navigation.types";
 
 const MealItem = ({ item }: { item: Meal }) => {
   const { title, imageUrl } = item;
-  const navigation = useNavigation<CategoriesScreenNavigationProp>();
+  const navigation = useNavigation<HomeScreenNavigationProp>();
   const handlePressMeal = () => {
     navigation.navigate("MealDetails", { ...item });
   };

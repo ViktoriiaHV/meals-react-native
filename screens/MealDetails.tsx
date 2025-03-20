@@ -7,13 +7,13 @@ import List from "../components/MealDetail/List";
 import Subtitle from "../components/MealDetail/Subtitle";
 import MealItemDetails from "../components/MealItemDetails";
 import {
-  CategoriesScreenNavigationProp,
+  HomeScreenNavigationProp,
   MealDetailRouteProp,
 } from "../types/navigation.types";
 
 function MealDetailsScreen() {
   const route = useRoute<MealDetailRouteProp>();
-  const navigation = useNavigation<CategoriesScreenNavigationProp>();
+  const navigation = useNavigation<HomeScreenNavigationProp>();
 
   const {
     title,
