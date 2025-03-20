@@ -12,6 +12,8 @@ import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import { ReactNode, useLayoutEffect } from "react";
 
+import { FavouritesProvider } from "../store/favourites-context";
+
 function Layout({ children }: { children: ReactNode }) {
   const [fontsLoaded, fontsError] = useFonts({
     Lato_300Light,
@@ -29,10 +31,10 @@ function Layout({ children }: { children: ReactNode }) {
     }
   }, [fontsLoaded, fontsError]);
   return (
-    <>
+    <FavouritesProvider>
       <StatusBar style="auto" />
       {children}
-    </>
+    </FavouritesProvider>
   );
 }
 export default Layout;

@@ -14,7 +14,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const Drawer = createDrawerNavigator<DrawerParamList>();
 
-const createDrawerNavigation = () => {
+const DrawerNavigation = () => {
   return (
     <Drawer.Navigator
       screenOptions={{
@@ -38,11 +38,15 @@ const createDrawerNavigation = () => {
           ),
         }}
       />
-      <Drawer.Screen name="Favourites" component={FavouritesScreen} options={{
+      <Drawer.Screen
+        name="Favourites"
+        component={FavouritesScreen}
+        options={{
           drawerIcon: ({ color, size }) => (
             <Ionicons name="star" color={color} size={size} />
           ),
-        }} />
+        }}
+      />
     </Drawer.Navigator>
   );
 };
@@ -69,7 +73,7 @@ export default function App() {
         >
           <Stack.Screen
             name="Homepage"
-            component={createDrawerNavigation}
+            component={DrawerNavigation}
             options={{
               headerShown: false,
             }}

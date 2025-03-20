@@ -1,11 +1,12 @@
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { useEffect } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { Image, ScrollView, StyleSheet, Text } from "react-native";
 
 import IconButton from "../components/MealDetail/IconButton";
 import List from "../components/MealDetail/List";
 import Subtitle from "../components/MealDetail/Subtitle";
 import MealItemDetails from "../components/MealItemDetails";
+import { useFavourites } from "../store/favourites-context";
 import {
   HomeScreenNavigationProp,
   MealDetailRouteProp,
@@ -16,6 +17,7 @@ function MealDetailsScreen() {
   const navigation = useNavigation<HomeScreenNavigationProp>();
 
   const {
+    id,
     title,
     imageUrl,
     affordability,
@@ -25,14 +27,30 @@ function MealDetailsScreen() {
     steps,
   } = route.params;
 
+  const { ids: favourites, addFavourite, removeFavourite } = useFavourites();
+
+  const isFavourite = useMemo(() => favourites.includes(id), [favourites, id]);
+
+  const handleFavouriteIconPress = useCallback(() => {
+    if (isFavourite) {
+      removeFavourite(id);
+    } else {
+      addFavourite(id);
+    }
+  }, [addFavourite, id, isFavourite, removeFavourite]);
+
   useEffect(() => {
     navigation.setOptions({
       title,
       headerRight: () => (
-        <IconButton icon="star-outline" color="#430841" onPress={() => {}} />
+        <IconButton
+          icon={isFavourite ? "star" : "star-outline"}
+          color="#430841"
+          onPress={handleFavouriteIconPress}
+        />
       ),
     });
-  }, [navigation, title]);
+  }, [handleFavouriteIconPress, isFavourite, navigation, title]);
 
   return (
     <ScrollView style={styles.container}>
