@@ -1,18 +1,28 @@
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { useEffect } from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 
+import Subtitle from "../components/MealDetail/Subtitle";
 import MealItemDetails from "../components/MealItemDetails";
 import {
   CategoriesScreenNavigationProp,
   MealDetailRouteProp,
 } from "../types/navigation.types";
+import List from "../components/MealDetail/List";
 
 function MealDetailsScreen() {
   const route = useRoute<MealDetailRouteProp>();
   const navigation = useNavigation<CategoriesScreenNavigationProp>();
 
-  const { title, imageUrl, affordability, complexity, duration, ingredients, steps } = route.params;
+  const {
+    title,
+    imageUrl,
+    affordability,
+    complexity,
+    duration,
+    ingredients,
+    steps,
+  } = route.params;
 
   useEffect(() => {
     navigation.setOptions({
@@ -21,28 +31,37 @@ function MealDetailsScreen() {
   }, [navigation, title]);
 
   return (
-    <View>
+    <ScrollView style={styles.container}>
       <Image source={{ uri: imageUrl }} style={styles.image} />
-      <Text>{title} Details</Text>
+      <Text style={styles.title}>{title}</Text>
       <MealItemDetails
         affordability={affordability}
         complexity={complexity}
         duration={duration}
       />
-      {/* INGREDIENTS */}
-      <Text>Ingrediens</Text>
-      {ingredients.map((ingredient: string) => <Text key={ingredient}>{ingredient}</Text>)}
-      {/* STEPS */}
-      <Text>Steps</Text>
-      {steps.map((step: string) => <Text key={step}>{step}</Text>)}
-    </View>
+
+      <Subtitle>Ingrediens</Subtitle>
+      <List items={ingredients} />
+
+      <Subtitle>Steps</Subtitle>
+      <List items={steps} />
+    </ScrollView>
   );
 }
 export default MealDetailsScreen;
 
 const styles = StyleSheet.create({
+  container: {
+    marginBottom: 32,
+  },
   image: {
     width: "100%",
     height: 300,
+  },
+  title: {
+    fontFamily: "Lato_700Bold",
+    fontSize: 24,
+    margin: 12,
+    textAlign: "center",
   },
 });

@@ -3,6 +3,7 @@ import {
   Lato_300Light,
   Lato_300Light_Italic,
   Lato_700Bold,
+  Lato_700Bold_Italic,
   Lato_900Black,
   useFonts,
 } from "@expo-google-fonts/lato";
@@ -26,6 +27,7 @@ export default function App() {
     Lato_300Light,
     Lato_300Light_Italic,
     Lato_700Bold,
+    Lato_700Bold_Italic,
     Lato_900Black,
   });
 
