@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
   title: {
     textAlign: "center",
     fontFamily: "Lato_700Bold",
-    fontSize: 18,
+    fontSize: 20,
     margin: 8,
   },
   tilePressed: {

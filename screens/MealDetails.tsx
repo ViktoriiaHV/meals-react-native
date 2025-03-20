@@ -1,14 +1,15 @@
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { useEffect } from "react";
-import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Image, ScrollView, StyleSheet, Text } from "react-native";
 
+import IconButton from "../components/MealDetail/IconButton";
+import List from "../components/MealDetail/List";
 import Subtitle from "../components/MealDetail/Subtitle";
 import MealItemDetails from "../components/MealItemDetails";
 import {
   CategoriesScreenNavigationProp,
   MealDetailRouteProp,
 } from "../types/navigation.types";
-import List from "../components/MealDetail/List";
 
 function MealDetailsScreen() {
   const route = useRoute<MealDetailRouteProp>();
@@ -27,6 +28,9 @@ function MealDetailsScreen() {
   useEffect(() => {
     navigation.setOptions({
       title,
+      headerRight: () => (
+        <IconButton icon="star-outline" color="#430841" onPress={() => {}} />
+      ),
     });
   }, [navigation, title]);
 

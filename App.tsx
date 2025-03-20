@@ -1,19 +1,7 @@
-import {
-  Lato_400Regular,
-  Lato_300Light,
-  Lato_300Light_Italic,
-  Lato_700Bold,
-  Lato_700Bold_Italic,
-  Lato_900Black,
-  useFonts,
-} from "@expo-google-fonts/lato";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import * as SplashScreen from "expo-splash-screen";
-import { StatusBar } from "expo-status-bar";
-import { useLayoutEffect } from "react";
-import { StyleSheet } from "react-native";
 
+import Layout from "./layout/Layout";
 import CategoriesScreen from "./screens/Categories";
 import MealDetailsScreen from "./screens/MealDetails";
 import MealsOverviewScreen from "./screens/MealsOverview";
@@ -22,30 +10,20 @@ import { RootStackParamList } from "./types/navigation.types";
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function App() {
-  const [fontsLoaded, fontsError] = useFonts({
-    Lato_400Regular,
-    Lato_300Light,
-    Lato_300Light_Italic,
-    Lato_700Bold,
-    Lato_700Bold_Italic,
-    Lato_900Black,
-  });
-
-  useLayoutEffect(() => {
-    if (fontsLoaded || fontsError) {
-      SplashScreen.hideAsync();
-    }
-  }, [fontsLoaded, fontsError]);
-
   return (
-    <>
-      <StatusBar style="auto" />
+    <Layout>
       <NavigationContainer>
         <Stack.Navigator
           initialRouteName="Categories"
           screenOptions={{
             headerStyle: { backgroundColor: "#ecc8e1" },
             headerTintColor: "#88005f",
+            headerTitleStyle: {
+              fontFamily: "Lato_900Black",
+            },
+            headerBackTitleStyle: {
+              fontFamily: "Lato_400Regular_Italic",
+            },
             contentStyle: {
               backgroundColor: "#f2dbee",
             },
@@ -69,11 +47,10 @@ export default function App() {
           <Stack.Screen
             name="MealDetails"
             component={MealDetailsScreen}
+            // options={{headerRight: () => <Text>hoho</Text>}}
           />
         </Stack.Navigator>
       </NavigationContainer>
-    </>
+    </Layout>
   );
 }
-
-const styles = StyleSheet.create({});

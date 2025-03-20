@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
     // backgroundColor: "#e8c8e7",
   },
   itemText: {
-     color: "#9e6c9c"
+     color: "#9e6c9c",
+     fontFamily: 'Lato_400Regular'
   }
 });
