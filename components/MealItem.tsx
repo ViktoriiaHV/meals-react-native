@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { useNavigation } from "@react-navigation/native";
 import {
   StyleSheet,
   View,
@@ -8,33 +8,30 @@ import {
   Platform,
 } from "react-native";
 
+import MealItemDetails from "./MealItemDetails";
 import Meal from "../models/meal";
+import { CategoriesScreenNavigationProp } from "../types/navigation.types";
 
-const DetailItem = ({ children }: { children: ReactNode }) => (
-  <Text style={styles.detailItem}>{children}</Text>
-);
+const MealItem = ({ item }: { item: Meal }) => {
+  const { title, imageUrl } = item;
+  const navigation = useNavigation<CategoriesScreenNavigationProp>();
+  const handlePressMeal = () => {
+    navigation.navigate("MealDetails", { ...item });
+  };
 
-const MealItem = ({
-  item: { title, imageUrl, duration, complexity, affordability },
-}: {
-  item: Meal;
-}) => {
   return (
     <View style={styles.mealItem}>
       <Pressable
         android_ripple={{ color: "#ccc" }}
         style={({ pressed }) => pressed && styles.tilePressed}
+        onPress={handlePressMeal}
       >
         <View style={styles.innerContainer}>
           <View>
             <Image source={{ uri: imageUrl }} style={styles.image} />
             <Text style={styles.title}>{title}</Text>
           </View>
-          <View style={styles.details}>
-            <DetailItem>{duration}m</DetailItem>
-            <DetailItem>{complexity.toUpperCase()}</DetailItem>
-            <DetailItem>{affordability.toUpperCase()}</DetailItem>
-          </View>
+          <MealItemDetails {...item} />
         </View>
       </Pressable>
     </View>
@@ -68,18 +65,6 @@ const styles = StyleSheet.create({
     fontFamily: "Lato_700Bold",
     fontSize: 18,
     margin: 8,
-  },
-  details: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "flex-end",
-    gap: 8,
-    padding: 16,
-  },
-  detailItem: {
-    fontFamily: "Lato_300Light_Italic",
-    fontSize: 12,
-    color: "#3d3c3c",
   },
   tilePressed: {
     opacity: Platform.select({ ios: 0.8 }),

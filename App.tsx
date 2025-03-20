@@ -14,6 +14,7 @@ import { useLayoutEffect } from "react";
 import { StyleSheet } from "react-native";
 
 import CategoriesScreen from "./screens/Categories";
+import MealDetailsScreen from "./screens/MealDetails";
 import MealsOverviewScreen from "./screens/MealsOverview";
 import { RootStackParamList } from "./types/navigation.types";
 
@@ -62,6 +63,10 @@ export default function App() {
             // options={({ route }) => ({
             //   title: route.params.title,
             // })}
+          />
+          <Stack.Screen
+            name="MealDetails"
+            component={MealDetailsScreen}
           />
         </Stack.Navigator>
       </NavigationContainer>

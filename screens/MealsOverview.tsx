@@ -1,4 +1,4 @@
-import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { useEffect } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 
@@ -6,10 +6,8 @@ import MealItem from "../components/MealItem";
 import { MEALS } from "../data/dummy-data";
 import {
   CategoriesScreenNavigationProp,
-  RootStackParamList,
+  MealsOverviewRouteProp,
 } from "../types/navigation.types";
-
-type MealsOverviewRouteProp = RouteProp<RootStackParamList, "MealsOverview">;
 
 function MealsOverviewScreen() {
   const route = useRoute<MealsOverviewRouteProp>();
